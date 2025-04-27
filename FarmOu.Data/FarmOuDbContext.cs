@@ -74,7 +74,8 @@ public class FarmOuDbContext
         DbContextOptions<FarmOuDbContext> options)
         : base(options) { }
 
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    protected override void OnConfiguring(
+        DbContextOptionsBuilder optionsBuilder)
     {
         if (!optionsBuilder.IsConfigured)
         {

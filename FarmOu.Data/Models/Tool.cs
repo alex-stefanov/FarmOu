@@ -14,8 +14,7 @@ public class Tool
     /// Gets or sets the unique identifier for the tool.
     /// </summary>
     [Key]
-    public string Id { get; set; }
-        = Guid.NewGuid().ToString();
+    public string Id { get; set; } = null!;
 
     /// <summary>
     /// Gets or sets the name of the tool.
@@ -52,13 +51,13 @@ public class Tool
     /// Gets or sets the time the tool saves when harvesting the specified crop.
     /// </summary>
     [Required]
-    public int SpecificSavingTimeInSeconds { get; set; }
+    public int SpecificSavingTimeInMiliSeconds { get; set; }
 
     /// <summary>
     /// Gets or sets the time the tool saves when harvesting all other crops.
     /// </summary>
     [Required]
-    public int GeneralSavingTimeInSeconds { get; set; }
+    public int GeneralSavingTimeInMiliSeconds { get; set; }
 
     /// <summary>
     /// Gets or sets the bonus quantity the tool gives when harvesting the specified crop.

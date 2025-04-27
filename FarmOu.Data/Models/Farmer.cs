@@ -37,13 +37,19 @@ public class Farmer
     /// Gets or sets the unique identifier of the level the farmer is.
     /// </summary>
     [Required]
-    public string XpLevelId { get; set; } = null!;
+    public int XpLevelId { get; set; } 
 
     /// <summary>
     /// Navigation property for the level of the farmer.
     /// </summary>
     [ForeignKey(nameof(XpLevelId))]
     public virtual XpLevel XpLevel { get; set; } = null!;
+
+    /// <summary>
+    /// Gets or sets the current xp.
+    /// </summary>
+    [Required]
+    public int CurrentFarmerXp { get; set; } = 0;
 
     /// <summary>
     /// Navigation property for the crops assigned to the farmer.

@@ -12,8 +12,7 @@ public class Crop
     /// Gets or sets the unique identifier for the crop.
     /// </summary>
     [Key]
-    public string Id { get; set; }
-        = Guid.NewGuid().ToString();
+    public string Id { get; set; } = null!;
 
     /// <summary>
     /// Gets or sets the name of the crop.
@@ -26,7 +25,7 @@ public class Crop
     /// Gets or sets the time harvesting the crop takes.
     /// </summary>
     [Required]
-    public int HarvestingTimeInSeconds { get; set; }
+    public int HarvestingTimeInMiliSeconds { get; set; }
 
     /// <summary>
     /// Gets or sets the xp gained per crop.

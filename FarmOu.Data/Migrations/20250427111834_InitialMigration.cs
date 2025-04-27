@@ -3,6 +3,8 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
+#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
+
 namespace FarmOu.Data.Migrations
 {
     /// <inheritdoc />
@@ -31,7 +33,7 @@ namespace FarmOu.Data.Migrations
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(80)", maxLength: 80, nullable: false),
-                    HarvestingTimeInSeconds = table.Column<int>(type: "int", nullable: false),
+                    HarvestingTimeInMiliSeconds = table.Column<int>(type: "int", nullable: false),
                     XpPerHarvest = table.Column<float>(type: "real", nullable: false),
                     QuantityPerHarvest = table.Column<int>(type: "int", nullable: false),
                     OverallSold = table.Column<int>(type: "int", nullable: false),
@@ -46,9 +48,9 @@ namespace FarmOu.Data.Migrations
                 name: "XpLevels",
                 columns: table => new
                 {
-                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     Level = table.Column<int>(type: "int", nullable: false),
-                    CurrentFarmerXp = table.Column<int>(type: "int", nullable: false),
                     NeededFarmerXp = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -86,8 +88,8 @@ namespace FarmOu.Data.Migrations
                     LevelNeeded = table.Column<int>(type: "int", nullable: false),
                     CropId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Rarity = table.Column<int>(type: "int", nullable: false),
-                    SpecificSavingTimeInSeconds = table.Column<int>(type: "int", nullable: false),
-                    GeneralSavingTimeInSeconds = table.Column<int>(type: "int", nullable: false),
+                    SpecificSavingTimeInMiliSeconds = table.Column<int>(type: "int", nullable: false),
+                    GeneralSavingTimeInMiliSeconds = table.Column<int>(type: "int", nullable: false),
                     SpecificBonusQuantityPerHarvest = table.Column<int>(type: "int", nullable: false),
                     GeneralBonusQuantityPerHarvest = table.Column<int>(type: "int", nullable: false)
                 },
@@ -110,7 +112,8 @@ namespace FarmOu.Data.Migrations
                     FirstName = table.Column<string>(type: "nvarchar(60)", maxLength: 60, nullable: false),
                     LastName = table.Column<string>(type: "nvarchar(60)", maxLength: 60, nullable: false),
                     Coins = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    XpLevelId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    XpLevelId = table.Column<int>(type: "int", nullable: false),
+                    CurrentFarmerXp = table.Column<int>(type: "int", nullable: false),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -383,6 +386,124 @@ namespace FarmOu.Data.Migrations
                         principalTable: "Tools",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.InsertData(
+                table: "Crops",
+                columns: new[] { "Id", "HarvestingTimeInMiliSeconds", "Name", "OverallBought", "OverallSold", "QuantityPerHarvest", "XpPerHarvest" },
+                values: new object[,]
+                {
+                    { "a3f1e7c2-4b5d-4e12-9f07-1b2c3d4e5f60", 2500, "Wheat", 0, 0, 4, 8f },
+                    { "b4e2f8d3-5c6e-4f23-8a18-2c3d4e5f6a70", 3000, "Bell Pepper", 0, 0, 2, 5f },
+                    { "c5f309e4-6d7f-4g34-1b29-3d4e5f6a7b80", 3500, "Carrot", 0, 0, 3, 9f },
+                    { "d6g410f5-7e80-4h45-2c30-4e5f6a7b8c90", 4000, "Mushroom", 0, 0, 1, 30f },
+                    { "e7h521g6-8f91-4i56-3d41-5f6a7b8c9d01", 4500, "Potato", 0, 0, 2, 10f },
+                    { "f8i632h7-9g02-4j67-4e52-6a7b8c9d0e12", 6000, "Corn", 0, 0, 3, 12f },
+                    { "g9j743i8-0h13-4k78-5f63-7b8c9d0e1f23", 7000, "Tomato", 0, 0, 2, 15f },
+                    { "h0k854j9-1i24-4l89-6g74-8c9d0e1f2g34", 9000, "Rice", 0, 0, 3, 16f },
+                    { "i1l965k0-2j35-4m90-7h85-9d0e1f2g3h45", 10000, "Strawberry", 0, 0, 2, 18f },
+                    { "j2m076l1-3k46-4n01-8i96-0e1f2g3h4i56", 12000, "Cotton", 0, 0, 2, 20f },
+                    { "k3n187m2-4l57-4o12-9j07-1f2g3h4i5j67", 12500, "Dragonfruit", 0, 0, 2, 28f },
+                    { "l4o298n3-5m68-4p23-0k18-2g3h4i5j6k78", 13000, "Blueberry", 0, 0, 2, 22f },
+                    { "m5p309o4-6n79-4q34-1l29-3h4i5j6k7l89", 14000, "Grapes", 0, 0, 3, 18f },
+                    { "n6q410p5-7o80-4r45-2m30-4i5j6k7l8m90", 15000, "Pumpkin", 0, 0, 1, 25f }
+                });
+
+            migrationBuilder.InsertData(
+                table: "XpLevels",
+                columns: new[] { "Id", "Level", "NeededFarmerXp" },
+                values: new object[,]
+                {
+                    { 1, 1, 100 },
+                    { 2, 2, 120 },
+                    { 3, 3, 140 },
+                    { 4, 4, 160 },
+                    { 5, 5, 180 },
+                    { 6, 6, 200 },
+                    { 7, 7, 220 },
+                    { 8, 8, 240 },
+                    { 9, 9, 260 },
+                    { 10, 10, 280 },
+                    { 11, 11, 300 },
+                    { 12, 12, 320 },
+                    { 13, 13, 340 },
+                    { 14, 14, 360 },
+                    { 15, 15, 380 },
+                    { 16, 16, 400 },
+                    { 17, 17, 420 },
+                    { 18, 18, 440 },
+                    { 19, 19, 460 },
+                    { 20, 20, 480 },
+                    { 21, 21, 500 },
+                    { 22, 22, 520 },
+                    { 23, 23, 540 },
+                    { 24, 24, 560 },
+                    { 25, 25, 580 },
+                    { 26, 26, 600 },
+                    { 27, 27, 620 },
+                    { 28, 28, 640 },
+                    { 29, 29, 660 },
+                    { 30, 30, 680 },
+                    { 31, 31, 700 },
+                    { 32, 32, 720 },
+                    { 33, 33, 740 },
+                    { 34, 34, 760 },
+                    { 35, 35, 780 },
+                    { 36, 36, 800 },
+                    { 37, 37, 820 },
+                    { 38, 38, 840 },
+                    { 39, 39, 860 },
+                    { 40, 40, 880 },
+                    { 41, 41, 900 },
+                    { 42, 42, 920 },
+                    { 43, 43, 940 },
+                    { 44, 44, 960 },
+                    { 45, 45, 980 },
+                    { 46, 46, 1000 },
+                    { 47, 47, 1020 },
+                    { 48, 48, 1040 },
+                    { 49, 49, 1060 },
+                    { 50, 50, 1080 },
+                    { 51, 51, 1100 },
+                    { 52, 52, 1120 },
+                    { 53, 53, 1140 },
+                    { 54, 54, 1160 },
+                    { 55, 55, 1180 },
+                    { 56, 56, 1200 },
+                    { 57, 57, 1220 },
+                    { 58, 58, 1240 },
+                    { 59, 59, 1260 },
+                    { 60, 60, 0 }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Tools",
+                columns: new[] { "Id", "CropId", "GeneralBonusQuantityPerHarvest", "GeneralSavingTimeInMiliSeconds", "LevelNeeded", "Name", "Rarity", "SpecificBonusQuantityPerHarvest", "SpecificSavingTimeInMiliSeconds" },
+                values: new object[,]
+                {
+                    { "0794a9c9-f6d4-4c11-a1c0-f77ee2cac235", "a3f1e7c2-4b5d-4e12-9f07-1b2c3d4e5f60", 0, 0, 5, "Wheatwind Scythe", 0, 1, 500 },
+                    { "16559923-bf70-4f24-846d-4711303ec9b4", "j2m076l1-3k46-4n01-8i96-0e1f2g3h4i56", 0, 0, 15, "Cotton Cutter", 1, 1, 1000 },
+                    { "1e6c2c50-1e05-4a5a-b990-32813b97823c", "l4o298n3-5m68-4p23-0k18-2g3h4i5j6k78", 1, 1000, 25, "Blueberry Blitz", 2, 2, 1500 },
+                    { "27f51def-481c-4cf1-b7e9-07aadfe73d60", "f8i632h7-9g02-4j67-4e52-6a7b8c9d0e12", 0, 0, 15, "Corncob Clarifier", 1, 1, 1000 },
+                    { "3307ec62-9b30-4134-9b99-742d49803994", "l4o298n3-5m68-4p23-0k18-2g3h4i5j6k78", 3, 2000, 50, "Godlike Blueberry Blitz", 5, 4, 2500 },
+                    { "34a2d676-241b-43e8-a3dd-67c425570920", "m5p309o4-6n79-4q34-1l29-3h4i5j6k7l89", 2, 1500, 35, "Mythic Grape Grappler", 4, 3, 2000 },
+                    { "3566e129-a898-4f81-b1af-1ba89bb1c901", "k3n187m2-4l57-4o12-9j07-1f2g3h4i5j67", 1, 1000, 25, "Dragonfruit Dicer", 2, 2, 1500 },
+                    { "76a6c530-ac39-4029-85c2-e67caccdb192", "f8i632h7-9g02-4j67-4e52-6a7b8c9d0e12", 2, 1500, 35, "Mythic Corncob Clarifier", 4, 3, 2000 },
+                    { "7d6cbabc-cbfb-42eb-bd93-590ed5f6f3da", "d6g410f5-7e80-4h45-2c30-4e5f6a7b8c90", 0, 0, 5, "Fungus Forger", 0, 1, 500 },
+                    { "7e6e5f03-0f1f-43e8-a3d0-9cab05a9a117", "b4e2f8d3-5c6e-4f23-8a18-2c3d4e5f6a70", 0, 0, 5, "Pepper Pruner", 0, 1, 500 },
+                    { "7f22cd92-14b2-4122-8444-d6e4d5ececde", "b4e2f8d3-5c6e-4f23-8a18-2c3d4e5f6a70", 3, 2000, 50, "Godlike Pepper Pruner", 5, 4, 2500 },
+                    { "8ccd5537-ccd7-4007-88c6-8a1be39127b2", "j2m076l1-3k46-4n01-8i96-0e1f2g3h4i56", 2, 1500, 35, "Mythic Cotton Cutter", 4, 3, 2000 },
+                    { "9431273a-2df2-466b-94f0-da13e7735b66", "n6q410p5-7o80-4r45-2m30-4i5j6k7l8m90", 3, 2000, 50, "Godlike Pumpkin Pulverizer", 5, 4, 2500 },
+                    { "950d94f9-8487-4380-b3c7-fc533e8d8c89", "n6q410p5-7o80-4r45-2m30-4i5j6k7l8m90", 1, 1000, 25, "Pumpkin Pulverizer", 2, 2, 1500 },
+                    { "a2cc6a9a-26a4-4dcf-a2ae-f9527b126fcd", "g9j743i8-0h13-4k78-5f63-7b8c9d0e1f23", 0, 0, 15, "Tomato Twister", 1, 1, 1000 },
+                    { "a4ccf8be-ec77-434c-b454-1d250716547c", "e7h521g6-8f91-4i56-3d41-5f6a7b8c9d01", 0, 0, 5, "Tater Tamer", 0, 1, 500 },
+                    { "a4f46365-6d04-4780-969e-6ead81d7faca", "h0k854j9-1i24-4l89-6g74-8c9d0e1f2g34", 0, 0, 15, "Rice Reaper", 1, 1, 1000 },
+                    { "ac633fba-5c14-4a42-b616-0bd729e5841a", "m5p309o4-6n79-4q34-1l29-3h4i5j6k7l89", 1, 1000, 25, "Grape Grappler", 2, 2, 1500 },
+                    { "ad5f3d9f-86cb-4e96-b959-6ef30528e5e1", "a3f1e7c2-4b5d-4e12-9f07-1b2c3d4e5f60", 2, 1500, 35, "Mythic Wheatwind Scythe", 4, 3, 2000 },
+                    { "b63467bf-8dc6-472a-88f1-af869eefac8a", "c5f309e4-6d7f-4g34-1b29-3d4e5f6a7b80", 0, 0, 5, "Carrot Crescendo", 0, 1, 500 },
+                    { "bcba2bf4-969f-4f7d-813c-4810a5f377b7", "i1l965k0-2j35-4m90-7h85-9d0e1f2g3h45", 2, 1500, 35, "Mythic Berry Brawler", 4, 3, 2000 },
+                    { "d3adc72a-1d09-454c-a45b-5b3f80f41987", "e7h521g6-8f91-4i56-3d41-5f6a7b8c9d01", 3, 2000, 50, "Godlike Tater Tamer", 5, 4, 2500 },
+                    { "dcad4c4b-3f28-4e25-b5dd-6a224eb684b3", "i1l965k0-2j35-4m90-7h85-9d0e1f2g3h45", 0, 0, 15, "Berry Brawler", 1, 1, 1000 }
                 });
 
             migrationBuilder.CreateIndex(

@@ -11,20 +11,13 @@ public class XpLevel
     /// Gets or sets the unique identifier for the xp level.
     /// </summary>
     [Key]
-    public string Id { get; set; }
-        = Guid.NewGuid().ToString();
+    public int Id { get; set; }
 
     /// <summary>
     /// Gets or sets the numerical value of the level.
     /// </summary>
     [Required]
     public int Level { get; set; } = 1;
-
-    /// <summary>
-    /// Gets or sets the current xp at the specified level.
-    /// </summary>
-    [Required]
-    public int CurrentFarmerXp { get; set; } = 0;
 
     /// <summary>
     /// Gets or sets the needed xp amount for level up.
