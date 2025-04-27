@@ -6,4 +6,10 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\FarmOu.Common\FarmOu.Common.csproj" />
+    <ProjectReference Include="..\FarmOu.Data\FarmOu.Data.csproj" />
+    <ProjectReference Include="..\FarmOu.Infrastructure\FarmOu.Infrastructure.csproj" />
+  </ItemGroup>
+
 </Project>

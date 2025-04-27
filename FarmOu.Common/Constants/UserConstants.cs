@@ -24,4 +24,14 @@ public static class UserConstants
     /// The minimum required length for a user's last name.
     /// </summary>
     public const int LastNameMinLength = 2;
+
+    /// <summary>
+    /// The maximum allowed length for a user's username.
+    /// </summary>
+    public const int UsernameMaxLength = 60;
+
+    /// <summary>
+    /// The minimum required length for a user's username.
+    /// </summary>
+    public const int UsernameMinLength = 2;
 }

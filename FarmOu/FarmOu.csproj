@@ -16,6 +16,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\FarmOu.Data\FarmOu.Data.csproj" />
+    <ProjectReference Include="..\FarmOu.UI\FarmOu.UI.csproj" />
   </ItemGroup>
 
 </Project>
