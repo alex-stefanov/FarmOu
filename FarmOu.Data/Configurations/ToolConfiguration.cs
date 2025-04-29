@@ -5,9 +5,16 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace FarmOu.Data.Configurations;
 
+/// <summary>
+/// Configuration class for the Tool entity.
+/// </summary>
 public class ToolConfiguration
     : IEntityTypeConfiguration<Tool>
 {
+    /// <summary>
+    /// Method to configure the Tool entity.
+    /// </summary>
+    /// <param name="builder">the entity type builder</param>
     public void Configure(
         EntityTypeBuilder<Tool> builder)
     {

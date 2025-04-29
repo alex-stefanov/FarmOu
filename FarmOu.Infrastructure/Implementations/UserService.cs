@@ -23,12 +23,7 @@ public class UserService
         this.userManager = userManager ?? throw new ArgumentNullException(nameof(userManager));
     }
 
-    /// <summary>
-    /// Registers a new user.
-    /// </summary>
-    /// <param name="userName">The username of the user to register.</param>
-    /// <param name="password">The password for the user.</param>
-    /// <returns>The registered user (Farmer) if registration is successful, or null if it fails.</returns>
+    ///<inheritdoc/>
     public async Task<Farmer?> RegisterUserAsync(
         string firstName,
         string lastName,
@@ -57,12 +52,7 @@ public class UserService
         return null;
     }
 
-    /// <summary>
-    /// Logs in a user with the provided username and password.
-    /// </summary>
-    /// <param name="userName">The username of the user to log in.</param>
-    /// <param name="password">The password for the user.</param>
-    /// <returns>The logged-in user (Farmer) if successful, or null if login fails.</returns>
+    ///<inheritdoc/>
     public async Task<Farmer?> LoginUserAsync(
         string userName,
         string password)

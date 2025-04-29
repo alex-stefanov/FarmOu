@@ -1,7 +1,13 @@
 ﻿namespace FarmOu.Common.Constants;
 
+/// <summary>
+/// Contains constants related to menu display, such as the logo and menu options.
+/// </summary>
 public static class MenuConstants
 {
+    /// <summary>
+    /// The logo displayed in the menu.
+    /// </summary>
     public const string Logo = @"
   ███████╗  █████╗ ██████╗  ███╗  ███╗ ██████╗ ██╗   ██╗
   ██╔════╝ ██╔══██╗██╔══██╗ ████╗ ████║██╔═══██╗██║   ██║

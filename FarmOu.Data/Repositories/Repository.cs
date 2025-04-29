@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace FarmOu.Data.Repositories;
 
+/// <inheritdoc/>
 public class Repository<TType, TId>(
     FarmOuDbContext dbContext)
     : IRepository<TType, TId>
@@ -11,6 +12,7 @@ public class Repository<TType, TId>(
     private readonly DbSet<TType> dbSet
         = dbContext.Set<TType>();
 
+    /// <inheritdoc/>
     public void Add(
         TType item)
     {
@@ -18,6 +20,7 @@ public class Repository<TType, TId>(
         dbContext.SaveChanges();
     }
 
+    /// <inheritdoc/>
     public async Task AddAsync(
         TType item)
     {
@@ -25,6 +28,7 @@ public class Repository<TType, TId>(
         await dbContext.SaveChangesAsync();
     }
 
+    /// <inheritdoc/>
     public void AddRange(
         TType[] items)
     {
@@ -32,6 +36,7 @@ public class Repository<TType, TId>(
         dbContext.SaveChanges();
     }
 
+    /// <inheritdoc/>
     public async Task AddRangeAsync(
         TType[] items)
     {
@@ -39,6 +44,7 @@ public class Repository<TType, TId>(
         await dbContext.SaveChangesAsync();
     }
 
+    /// <inheritdoc/>
     public bool Delete(
         TType entity)
     {
@@ -48,6 +54,7 @@ public class Repository<TType, TId>(
         return changes > 0;
     }
 
+    /// <inheritdoc/>
     public async Task<bool> DeleteAsync(
         TType entity)
     {
@@ -57,6 +64,7 @@ public class Repository<TType, TId>(
         return changes > 0;
     }
 
+    /// <inheritdoc/>
     public TType? FirstOrDefault(
         Func<TType, bool> predicate)
     {
@@ -66,6 +74,7 @@ public class Repository<TType, TId>(
         return entity;
     }
 
+    /// <inheritdoc/>
     public async Task<TType?> FirstOrDefaultAsync(
         Expression<Func<TType, bool>> predicate)
     {
@@ -75,16 +84,20 @@ public class Repository<TType, TId>(
         return entity;
     }
 
+    /// <inheritdoc/>
     public IEnumerable<TType> GetAll()
         => [.. dbSet];
 
+    /// <inheritdoc/>
     public async Task<IEnumerable<TType>> GetAllAsync()
         => await dbSet
             .ToArrayAsync();
 
+    /// <inheritdoc/>
     public IQueryable<TType> GetAllAttached()
         => dbSet.AsQueryable();
 
+    /// <inheritdoc/>
     public TType? GetById(
         TId id)
     {
@@ -94,6 +107,7 @@ public class Repository<TType, TId>(
         return entity;
     }
 
+    /// <inheritdoc/>
     public async Task<TType?> GetByIdAsync(
         TId id)
     {
@@ -103,6 +117,7 @@ public class Repository<TType, TId>(
         return entity;
     }
 
+    /// <inheritdoc/>
     public bool Update(
         TType item)
     {
@@ -120,6 +135,7 @@ public class Repository<TType, TId>(
         }
     }
 
+    /// <inheritdoc/>
     public async Task<bool> UpdateAsync(
         TType item)
     {

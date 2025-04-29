@@ -6,8 +6,15 @@ using FarmOu.Infrastructure.Interfaces;
 
 namespace FarmOu.UI.Menus;
 
+/// <summary>
+/// Menu for user authentication, including registration and login.
+/// </summary>
 public static class UserMenu
 {
+    /// <summary>
+    /// Displays the authentication menu for the user.
+    /// </summary>
+    /// <param name="userService">the user service needed for the logic</param>
     public static async Task<Farmer?> ShowAuthMenu(
         IUserService userService)
     {

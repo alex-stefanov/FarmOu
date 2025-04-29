@@ -4,9 +4,16 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace FarmOu.Data.Configurations;
 
+/// <summary>
+/// Configuration class for the Crop entity.
+/// </summary>
 public class CropConfiguration
     : IEntityTypeConfiguration<Crop>
 {
+    /// <summary>
+    /// Method to configure the Crop entity.
+    /// </summary>
+    /// <param name="builder">the entity type builder</param>
     public void Configure(
         EntityTypeBuilder<Crop> builder)
     {

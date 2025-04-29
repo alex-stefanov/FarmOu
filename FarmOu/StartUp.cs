@@ -9,8 +9,14 @@ using Microsoft.Extensions.Options;
 
 namespace FarmOu;
 
+/// <summary>
+/// Startup class for the application.
+/// </summary>
 public class StartUp
 {
+    /// <summary>
+    /// Main method to initialize and run the application.
+    /// </summary>
     public async static Task Main(
         string[] args)
     {

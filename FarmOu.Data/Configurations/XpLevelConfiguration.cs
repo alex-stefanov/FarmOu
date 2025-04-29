@@ -4,9 +4,16 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace FarmOu.Data.Configurations;
 
+/// <summary>
+/// Configuration class for the XpLevel entity.
+/// </summary>
 public class XpLevelConfiguration
     : IEntityTypeConfiguration<XpLevel>
 {
+    /// <summary>
+    /// Method to configure the XpLevel entity.
+    /// </summary>
+    /// <param name="builder">the entity type builder</param>
     public void Configure(
         EntityTypeBuilder<XpLevel> builder)
     {

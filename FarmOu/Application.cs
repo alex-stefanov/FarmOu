@@ -4,11 +4,19 @@ using FarmOu.UI.Menus;
 
 namespace FarmOu;
 
+/// <summary>
+/// Class for the main application flow.
+/// </summary>
 public static class Application
 {
     private static Farmer? currentFarmer;
 
-    public async static Task RunAsync(IUserService userService)
+    /// <summary>
+    /// Main method to run the application.
+    /// </summary>
+    /// <param name="userService"></param>
+    public async static Task RunAsync(
+        IUserService userService)
     {
         WelcomeMenu.LoadingMenu();
 

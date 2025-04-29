@@ -1,7 +1,13 @@
 ﻿namespace FarmOu.UI.Menus;
 
+/// <summary>
+/// Menu for displaying the welcome screen and loading animations.
+/// </summary>
 public static class WelcomeMenu
 {
+    /// <summary>
+    /// Displays the welcome menu with a loading animation.
+    /// </summary>
     public static void LoadingMenu()
     {
 
@@ -87,6 +93,9 @@ public static class WelcomeMenu
         Console.Clear();
     }
 
+    /// <summary>
+    /// Displays the options menu.
+    /// </summary>
     public static void OptionsMenu()
     {
         Console.ForegroundColor = ConsoleColor.Green;
