@@ -48,6 +48,10 @@ public class RegisterModel(
         [Required]
         [Display(Name = "Last Name")]
         public string LastName { get; set; } = null!;
+
+        [Required]
+        [Display(Name = "UserName")]
+        public string UserName { get; set; } = null!;
     }
 
     public async Task OnGetAsync(
@@ -69,7 +73,7 @@ public class RegisterModel(
             user.FirstName = Input.FirstName;
             user.LastName = Input.LastName;
 
-            await userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
+            await userStore.SetUserNameAsync(user, Input.UserName, CancellationToken.None);
             await emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
 
             user.XpLevelId = 1;

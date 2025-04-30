@@ -1,0 +1,58 @@
+﻿.welcome-container {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 76.5vh;
+    font-family: 'Open Sans', sans-serif;
+    color: #333;
+}
+
+.welcome-card {
+    background: rgba(255, 255, 255, 0.85);
+    border-radius: 1.5rem;
+    box-shadow: 0 0.5rem 2rem rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+    width: 90%;
+    padding: 3rem 2rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.welcome-card::before,
+.welcome-card::after {
+    content: '';
+    position: absolute;
+    border-radius: 50%;
+    background: #8BC34A;
+    opacity: 0.3;
+}
+
+.welcome-card::before {
+    width: 180px;
+    height: 180px;
+    top: -40px;
+    right: -40px;
+}
+
+.welcome-card::after {
+    width: 260px;
+    height: 260px;
+    bottom: -80px;
+    left: -80px;
+}
+
+.welcome-card h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    color: #4CAF50;
+    font-weight: 900;
+}
+
+.welcome-card p {
+    font-size: 1.125rem;
+    margin-bottom: 2rem;
+}

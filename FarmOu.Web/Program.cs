@@ -55,7 +55,7 @@ builder.Services.AddSession(cfg =>
 
 var app = builder.Build();
 
-app.ApplyMigrations();
+await app.ApplyMigrations();
 
 if (app.Environment.IsDevelopment())
 {

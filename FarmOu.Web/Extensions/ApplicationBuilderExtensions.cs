@@ -5,7 +5,7 @@ namespace FarmOu.Web.Extensions;
 
 public static class ApplicationBuilderExtensions
 {
-    public static IApplicationBuilder ApplyMigrations(
+    public async static Task<IApplicationBuilder> ApplyMigrations(
         this IApplicationBuilder app)
     {
         using IServiceScope serviceScope = app.ApplicationServices.CreateScope();
@@ -14,7 +14,7 @@ public static class ApplicationBuilderExtensions
             .ServiceProvider
             .GetRequiredService<FarmOuDbContext>()!;
 
-        dbContext.Database.Migrate();
+        await dbContext.Database.EnsureCreatedAsync();
 
         return app;
     }
