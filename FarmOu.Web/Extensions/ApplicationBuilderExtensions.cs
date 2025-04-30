@@ -13,6 +13,7 @@ public static class ApplicationBuilderExtensions
         FarmOuDbContext dbContext = serviceScope
             .ServiceProvider
             .GetRequiredService<FarmOuDbContext>()!;
+
         dbContext.Database.Migrate();
 
         return app;

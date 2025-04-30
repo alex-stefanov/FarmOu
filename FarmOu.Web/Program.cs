@@ -19,11 +19,14 @@ builder.Services
     });
 
 builder.Services
-   .AddIdentity<Farmer, IdentityRole<string>>()
-   .AddEntityFrameworkStores<FarmOuDbContext>()
-   .AddRoles<IdentityRole<string>>()
-   .AddSignInManager<SignInManager<Farmer>>()
-   .AddUserManager<UserManager<Farmer>>();
+    .AddDefaultIdentity<Farmer>(options =>
+    {
+        options.SignIn.RequireConfirmedAccount = false;
+    })
+    .AddRoles<IdentityRole>()
+    .AddEntityFrameworkStores<FarmOuDbContext>()
+    .AddUserManager<UserManager<Farmer>>()
+    .AddSignInManager<SignInManager<Farmer>>();
 
 builder.Services
     .RegisterRepositories()
@@ -52,15 +55,11 @@ builder.Services.AddSession(cfg =>
 
 var app = builder.Build();
 
+app.ApplyMigrations();
+
 if (app.Environment.IsDevelopment())
 {
     app.UseDeveloperExceptionPage();
-}
-else
-{
-    app.UseExceptionHandler("/Home/Error500");
-
-    app.UseStatusCodePagesWithRedirects("/Home/Error{0}");
 }
 
 app.UseHttpsRedirection();
