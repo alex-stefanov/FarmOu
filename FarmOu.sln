@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FarmOu.Common", "FarmOu.Com
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FarmOu.Infrastructure", "FarmOu.Infrastructure\FarmOu.Infrastructure.csproj", "{C7A0D0EF-BAD7-4A44-A093-2FC4DE7E1ED2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FarmOu.Web", "FarmOu.Web\FarmOu.Web.csproj", "{649D5AE8-009D-4B17-8267-60DBD9ADD509}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{C7A0D0EF-BAD7-4A44-A093-2FC4DE7E1ED2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C7A0D0EF-BAD7-4A44-A093-2FC4DE7E1ED2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C7A0D0EF-BAD7-4A44-A093-2FC4DE7E1ED2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{649D5AE8-009D-4B17-8267-60DBD9ADD509}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{649D5AE8-009D-4B17-8267-60DBD9ADD509}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{649D5AE8-009D-4B17-8267-60DBD9ADD509}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{649D5AE8-009D-4B17-8267-60DBD9ADD509}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
