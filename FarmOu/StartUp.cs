@@ -2,7 +2,6 @@
 using FarmOu.Data.Models;
 using FarmOu.Data.Repositories;
 using FarmOu.Infrastructure.Implementations;
-using FarmOu.Infrastructure.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
@@ -49,26 +48,42 @@ public class StartUp
         #region Register Repositories
 
         var cropRepository = new Repository<Crop, string>(context);
-        var cropBuyingRepository = new Repository<CropBuying, string>(context);
-        var cropSellRepository = new Repository<CropSell, string>(context);
+        var cropBuyingRepository = new Repository<CropBuying, object>(context);
+        var cropSellRepository = new Repository<CropSell, object>(context);
 
         var farmerRepository = new Repository<Farmer, string>(context);
-        var farmerCropRepository = new Repository<FarmerCrop, string>(context);
-        var farmerToolRepository = new Repository<FarmerTool, string>(context);
-        var farmingSessionRepository = new Repository<FarmingSession, string>(context);
+        var farmerCropRepository = new Repository<FarmerCrop, object>(context);
+        var farmerToolRepository = new Repository<FarmerTool, object>(context);
+        var farmingSessionRepository = new Repository<FarmingSession, object>(context);
 
         var toolRepository = new Repository<Tool, string>(context);
-        var toolBuyingRepository = new Repository<ToolBuying, string>(context);
+        var toolBuyingRepository = new Repository<ToolBuying, object>(context);
         var xpLevelRepository = new Repository<XpLevel, int>(context);
 
         #endregion
 
         #region Register Services
 
-        var userService = new UserService(userManager);
+        var userService = new UserService(
+            userManager);
+
+        var cropBazarService = new CropBazarService(
+            cropRepository,
+            cropBuyingRepository,
+            cropSellRepository,
+            farmerRepository);
+
+        var toolBazarService = new ToolBazarService(
+            toolRepository,
+            farmerToolRepository,
+            toolBuyingRepository,
+            farmerRepository);
 
         #endregion
 
-        await Application.RunAsync(userService);
+        await Application.RunAsync(
+            userService,
+            cropBazarService,
+            toolBazarService);
     }
 }

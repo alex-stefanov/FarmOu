@@ -23,6 +23,8 @@ public class UserService
         this.userManager = userManager ?? throw new ArgumentNullException(nameof(userManager));
     }
 
+    #region IUserService Members
+
     ///<inheritdoc/>
     public async Task<Farmer?> RegisterUserAsync(
         string firstName,
@@ -68,4 +70,6 @@ public class UserService
 
         return null;
     }
+
+    #endregion
 }

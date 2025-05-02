@@ -16,7 +16,9 @@ public static class Application
     /// </summary>
     /// <param name="userService"></param>
     public async static Task RunAsync(
-        IUserService userService)
+        IUserService userService,
+        ICropBazarService cropBazarService,
+        IToolBazarService toolBazarService)
     {
         WelcomeMenu.LoadingMenu();
 
