@@ -14,11 +14,15 @@ public static class Application
     /// <summary>
     /// Main method to run the application.
     /// </summary>
-    /// <param name="userService"></param>
+    /// <param name="userService">the user service</param>
+    /// <param name="cropBazarService">the crop bazar service</param>
+    /// <param name="toolBazarService">the tool bazar service</param>
+    /// <param name="farmingSessionService">the farming session service</param>
     public async static Task RunAsync(
         IUserService userService,
         ICropBazarService cropBazarService,
-        IToolBazarService toolBazarService)
+        IToolBazarService toolBazarService,
+        IFarmSessionService farmingSessionService)
     {
         WelcomeMenu.LoadingMenu();
 

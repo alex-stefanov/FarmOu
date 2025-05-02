@@ -13,11 +13,13 @@ namespace FarmOu.Infrastructure.Implementations;
 /// <param name="cropBRepository">Repository for managing crop purchase transactions (<see cref="CropBuying"/>).</param>
 /// <param name="cropSRepository">Repository for managing crop sale transactions (<see cref="CropSell"/>).</param>
 /// <param name="farmerRepository">Repository for managing farmers (<see cref="Farmer"/>).</param>
+/// <param name="fcRepository">Repository for managing farmer-crop associations (<see cref="FarmerCrop"/>).</param></param>
 public class CropBazarService(
     IRepository<Crop, string> cropRepository,
     IRepository<CropBuying, object> cropBRepository,
     IRepository<CropSell, object> cropSRepository,
-    IRepository<Farmer, string> farmerRepository)
+    IRepository<Farmer, string> farmerRepository,
+    IRepository<FarmerCrop, object> fcRepository)
     : ICropBazarService
 {
     #region ICropBazarService Members
@@ -49,6 +51,28 @@ public class CropBazarService(
         }
 
         farmer.Coins -= cropB.TotalSellPrice;
+
+        var farmerCrop = await fcRepository
+            .GetAllAttached()
+            .Where(x => x.FarmerId == farmer.Id && x.CropId == crop.Id)
+            .FirstOrDefaultAsync();
+
+        if (farmerCrop is null)
+        {
+            farmerCrop = new FarmerCrop
+            {
+                FarmerId = farmer.Id,
+                CropId = crop.Id,
+                Quantity = quantity,
+            };
+
+            await fcRepository.AddAsync(farmerCrop);
+        }
+        else
+        {
+            farmerCrop.Quantity += quantity;
+            await fcRepository.UpdateAsync(farmerCrop);
+        }
 
         await farmerRepository.UpdateAsync(farmer);
 

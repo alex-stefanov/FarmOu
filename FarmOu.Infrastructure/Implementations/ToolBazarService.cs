@@ -51,7 +51,25 @@ public class ToolBazarService(
             throw new ArgumentException($"Farmer with id {farmerId} does not have enough level to buy this tool.");
         }
 
+        var farmerTool = await ftRepository
+            .GetAllAttached()
+            .Where(x => x.FarmerId == farmer.Id && x.ToolId == tool.Id)
+            .FirstOrDefaultAsync();
+
+        if (farmerTool is not null)
+        {
+            throw new ArgumentException($"Farmer with id {farmerId} already has this tool.");
+        }
+
+        farmerTool = new FarmerTool
+        {
+            FarmerId = farmer.Id,
+            ToolId = tool.Id,
+        };
+
         farmer.Coins -= toolB.BuyPrice;
+
+        await ftRepository.AddAsync(farmerTool);
 
         await farmerRepository.UpdateAsync(farmer);
 

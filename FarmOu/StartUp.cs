@@ -71,7 +71,8 @@ public class StartUp
             cropRepository,
             cropBuyingRepository,
             cropSellRepository,
-            farmerRepository);
+            farmerRepository,
+            farmerCropRepository);
 
         var toolBazarService = new ToolBazarService(
             toolRepository,
@@ -79,11 +80,20 @@ public class StartUp
             toolBuyingRepository,
             farmerRepository);
 
+        var farmingSessionService = new FarmSessionService(
+            farmerRepository,
+            cropRepository,
+            toolRepository,
+            xpLevelRepository,
+            farmingSessionRepository,
+            farmerCropRepository);
+
         #endregion
 
         await Application.RunAsync(
             userService,
             cropBazarService,
-            toolBazarService);
+            toolBazarService,
+            farmingSessionService);
     }
 }
