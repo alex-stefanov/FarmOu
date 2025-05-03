@@ -53,39 +53,38 @@ public static class Application
                     {
                         currentFarmer = await UserMenu
                             .ShowAuthMenu(userService);
+
                         break;
                     }
                 case 2:
                     {
+                        await CropBazarMenu
+                            .ShowCropBazar(cropBazarService, currentFarmer!);
+
                         break;
                     }
                 case 3:
                     {
+                        ToolBazarMenu
+                            .ShowToolBazar();
+
                         break;
                     }
                 case 4:
                     {
-                        currentFarmer = null;
+                        FarmSessionMenu.CropSelectionMenu();
+
+                        FarmSessionMenu.ToolSelectionMenu();
+
+                        FarmSessionMenu.TimeSelectioneMenu();
+
+                        FarmSessionMenu.FarmAnimation();
+
                         break;
                     }
                 case 5:
                     {
-                        break;
-                    }
-                case 6:
-                    {
-                        break;
-                    }
-                case 7:
-                    {
-                        break;
-                    }
-                case 8:
-                    {
-                        break;
-                    }
-                case 9:
-                    {
+                        currentFarmer = null;
                         break;
                     }
                 default:

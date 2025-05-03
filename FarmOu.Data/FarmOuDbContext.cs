@@ -94,5 +94,11 @@ public class FarmOuDbContext
 
         modelBuilder.ApplyConfigurationsFromAssembly(
             Assembly.GetExecutingAssembly());
+
+        modelBuilder.Entity<FarmingSession>()
+            .HasOne(fs => fs.Tool)
+            .WithMany(t => t.FarmingSessions)
+            .HasForeignKey(fs => fs.ToolId)
+            .OnDelete(DeleteBehavior.NoAction);
     }
 }

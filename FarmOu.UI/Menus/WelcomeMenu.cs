@@ -111,9 +111,10 @@ public static class WelcomeMenu
 ║       MAIN MENU          ║
 ╠══════════════════════════╣
 ║ 1. Register/Login        ║
-║ 2.                       ║
-║ 3.                       ║
-║ 4. Logout                ║
+║ 2. Crop Bazar            ║
+║ 3. Tool Bazar            ║
+║ 4. Farm                  ║
+║ 5. Logout                ║
 ║ 0. Exit                  ║
 ╚══════════════════════════╝
 [0m");

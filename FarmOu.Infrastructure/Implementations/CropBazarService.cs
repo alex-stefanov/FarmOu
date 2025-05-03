@@ -165,6 +165,17 @@ public class CropBazarService(
         var crop = await cropRepository.GetByIdAsync(cropId)
             ?? throw new ArgumentException($"Crop with id {cropId} not found.");
 
+        var farmerCrop = await fcRepository
+            .GetAllAttached()
+            .Where(x => x.FarmerId == farmer.Id && x.CropId == crop.Id)
+            .FirstOrDefaultAsync();
+
+        if (farmerCrop is null
+            || farmerCrop.Quantity < quantity)
+        {
+            throw new ArgumentException($"Farmer with id {farmerId} does not have enough crops.");
+        }
+
         var cropS = new CropSell
         {
             FarmerId = farmer.Id,
