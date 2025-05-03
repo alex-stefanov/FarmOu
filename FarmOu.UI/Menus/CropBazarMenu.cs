@@ -15,8 +15,11 @@ public static class CropBazarMenu
             Console.Clear();
             DrawHeader();
 
-            var crops = await cbService.ShowAllCrops();
-            var cropList = crops.ToList();
+            var crops = await cbService
+                .ShowAllCrops();
+
+            var cropList = crops
+                .ToList();
 
             int selected = 0;
             bool confirmed = false;
@@ -24,26 +27,50 @@ public static class CropBazarMenu
             while (!confirmed)
             {
                 Console.Clear();
+
                 DrawHeader();
-                DrawCropList(cropList, selected);
+                DrawCropList(
+                    cropList,
+                    selected);
+
                 var key = Console.ReadKey(true).Key;
+
                 switch (key)
                 {
                     case ConsoleKey.UpArrow:
-                        selected = (selected <= 0) ? cropList.Count - 1 : selected - 1;
-                        break;
+                        {
+                            selected = (selected <= 0)
+                                ? cropList.Count - 1
+                                : selected - 1;
+
+                            break;
+                        }
                     case ConsoleKey.DownArrow:
-                        selected = (selected >= cropList.Count - 1) ? 0 : selected + 1;
-                        break;
+                        {
+                            selected = (selected >= cropList.Count - 1)
+                                ? 0 
+                                : selected + 1;
+
+                            break;
+                        }
                     case ConsoleKey.Enter:
-                        confirmed = true;
-                        break;
+                        {
+                            confirmed = true;
+
+                            break;
+                        }
                     case ConsoleKey.Escape:
-                        return;
+                        {
+                            return;
+                        }
                 }
             }
 
-            await ShowCrop(cbService, farmer, cropList[selected]);
+            await ShowCrop(
+                cbService,
+                farmer,
+                cropList[selected]);
+
             Console.WriteLine("\nPress any key to return...");
             Console.ReadKey(true);
         }
@@ -108,13 +135,27 @@ public static class CropBazarMenu
         switch (key)
         {
             case ConsoleKey.B:
-                await BuyCrops(cbService, farmer, crop);
-                break;
+                {
+                    await BuyCrops(
+                        cbService,
+                        farmer,
+                        crop);
+
+                    break;
+                }
             case ConsoleKey.S:
-                await SellCrops(cbService, farmer, crop);
-                break;
+                {
+                    await SellCrops(
+                        cbService,
+                        farmer,
+                        crop);
+
+                    break;
+                }
             default:
-                return;
+                {
+                    return;
+                }
         }
     }
 
@@ -134,17 +175,23 @@ public static class CropBazarMenu
         Console.ResetColor();
 
         Console.CursorVisible = true;
-        if (!int.TryParse(Console.ReadLine(), out int qty) || qty <= 0)
+        if (!int.TryParse(Console.ReadLine(), out int qty) 
+            || qty <= 0)
         {
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine("Invalid number. Try again.");
             Console.ResetColor();
+
             return;
         }
 
         try
         {
-            await cbService.BuyCrops(farmer.Id, crop.Id, qty);
+            await cbService.BuyCrops(
+                farmer.Id,
+                crop.Id,
+                qty);
+
             Console.ForegroundColor = ConsoleColor.DarkGreen;
             Console.WriteLine($"+{qty} {crop.Name} bought! Coins -{qty * await cbService.GetBuyPricePerCrop(crop.Id)}⛃");
             Console.ResetColor();
@@ -173,7 +220,8 @@ public static class CropBazarMenu
         Console.ResetColor();
 
         Console.CursorVisible = true;
-        if (!int.TryParse(Console.ReadLine(), out int qty) || qty <= 0)
+        if (!int.TryParse(Console.ReadLine(), out int qty) 
+            || qty <= 0)
         {
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine("Invalid number. Try again.");
@@ -183,7 +231,11 @@ public static class CropBazarMenu
 
         try
         {
-            await cbService.SellCrops(farmer.Id, crop.Id, qty);
+            await cbService.SellCrops(
+                farmer.Id,
+                crop.Id,
+                qty);
+
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine($"+{qty * await cbService.GetSellPricePerCrop(crop.Id)}⛃ earned! -{qty} {crop.Name} sold.");
             Console.ResetColor();
