@@ -65,8 +65,8 @@ public static class Application
                     }
                 case 3:
                     {
-                        ToolBazarMenu
-                            .ShowToolBazar();
+                        await ToolBazarMenu
+                            .ShowToolBazar(toolBazarService, currentFarmer!);
 
                         break;
                     }

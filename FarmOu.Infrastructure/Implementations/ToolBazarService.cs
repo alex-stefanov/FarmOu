@@ -41,14 +41,14 @@ public class ToolBazarService(
             BuyPrice = await GetToolBuyPrice(tool.Id),
         };
 
-        if (farmer.Coins < toolB.BuyPrice)
-        {
-            throw new ArgumentException($"Farmer with id {farmerId} does not have enough coins.");
-        }
-
         if (farmer.XpLevelId < tool.LevelNeeded)
         {
             throw new ArgumentException($"Farmer with id {farmerId} does not have enough level to buy this tool.");
+        }
+
+        if (farmer.Coins < toolB.BuyPrice)
+        {
+            throw new ArgumentException($"Farmer with id {farmerId} does not have enough coins.");
         }
 
         var farmerTool = await ftRepository
@@ -143,7 +143,7 @@ public class ToolBazarService(
             "Godlike Tater Tamer" => 50000m,
             "Godlike Blueberry Blitz" => 50000m,
             "Godlike Pumpkin Pulverizer" => 50000m,
-            _ => throw new ArgumentException($"Tool with id {toolId} not found.")
+            _ => throw new ArgumentException($"Tool with name {tool.Name} not found.")
         };
     }
 
