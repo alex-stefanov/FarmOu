@@ -88,12 +88,21 @@ public class StartUp
             farmingSessionRepository,
             farmerCropRepository);
 
+        var toolService = new ToolService(
+            farmerToolRepository);
+
+        var cropService = new CropService(
+            cropRepository,
+            farmerCropRepository);
+
         #endregion
 
         await Application.RunAsync(
             userService,
             cropBazarService,
             toolBazarService,
-            farmingSessionService);
+            farmingSessionService,
+            toolService,
+            cropService);
     }
 }

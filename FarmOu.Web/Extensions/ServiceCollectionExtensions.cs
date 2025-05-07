@@ -32,6 +32,8 @@ public static class ServiceCollectionExtensions
         services.AddScoped<ICropBazarService, CropBazarService>();
         services.AddScoped<IToolBazarService, ToolBazarService>();
         services.AddScoped<IFarmSessionService, FarmSessionService>();
+        services.AddScoped<IToolService, ToolService>();
+        services.AddScoped<ICropService, CropService>();
 
         return services;
     }

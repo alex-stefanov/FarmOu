@@ -9,6 +9,8 @@ public class CropService(
     IRepository<FarmerCrop, object> fcRepository)
     : ICropService
 {
+    #region ICropService Members
+
     public async Task<IEnumerable<(Crop, int)>> GetAllCropsWithQuantity(
         string farmerId)
     {
@@ -32,4 +34,6 @@ public class CropService(
 
         return cropsWithQuantities;
     }
+
+    #endregion
 }

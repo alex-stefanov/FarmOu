@@ -18,11 +18,15 @@ public static class Application
     /// <param name="cropBazarService">the crop bazar service</param>
     /// <param name="toolBazarService">the tool bazar service</param>
     /// <param name="farmingSessionService">the farming session service</param>
+    /// <param name="toolService">the tool service</param>
+    /// <param name="cropService">the crop service</param>
     public async static Task RunAsync(
         IUserService userService,
         ICropBazarService cropBazarService,
         IToolBazarService toolBazarService,
-        IFarmSessionService farmingSessionService)
+        IFarmSessionService farmingSessionService,
+        IToolService toolService,
+        ICropService cropService)
     {
         WelcomeMenu.LoadingMenu();
 
