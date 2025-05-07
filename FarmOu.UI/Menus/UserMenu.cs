@@ -21,6 +21,7 @@ public static class UserMenu
         while (true)
         {
             Console.Clear();
+
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine(MenuConstants.Logo);
             Console.ResetColor();

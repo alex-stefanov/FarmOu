@@ -72,13 +72,13 @@ public static class Application
                     }
                 case 4:
                     {
-                        FarmSessionMenu.CropSelectionMenu();
+                        await FarmSessionMenu.CropSelectionMenu();
 
-                        FarmSessionMenu.ToolSelectionMenu();
+                        await FarmSessionMenu.ToolSelectionMenu();
 
-                        FarmSessionMenu.TimeSelectioneMenu();
+                        await FarmSessionMenu.TimeSelectioneMenu();
 
-                        FarmSessionMenu.FarmAnimation();
+                        await FarmSessionMenu.FarmAnimation();
 
                         break;
                     }

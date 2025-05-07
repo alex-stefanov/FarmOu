@@ -8,8 +8,8 @@ namespace FarmOu.UI.Menus;
 public static class ToolBazarMenu
 {
     public async static Task ShowToolBazar(
-    IToolBazarService tbService,
-    Farmer farmer)
+        IToolBazarService tbService,
+        Farmer farmer)
     {
         while (true)
         {

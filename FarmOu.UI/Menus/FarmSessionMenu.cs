@@ -1,23 +1,26 @@
-﻿namespace FarmOu.UI.Menus;
+﻿using FarmOu.Data.Models;
 
-public static class FarmSessionMenu
+namespace FarmOu.UI.Menus;
+
+public static class FarmSessionMenu(
+    CropSer)
 {
-    public static void CropSelectionMenu()
+    public static Task<Crop> CropSelectionMenu()
     {
 
     }
 
-    public static void ToolSelectionMenu()
+    public static Task<Tool> ToolSelectionMenu()
     {
 
     }
 
-    public static void TimeSelectioneMenu()
+    public static Task<long> TimeSelectioneMenu()
     {
 
     }
 
-    public static void FarmAnimation()
+    public static Task FarmAnimation()
     {
 
     }
