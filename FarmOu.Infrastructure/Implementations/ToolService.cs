@@ -20,7 +20,7 @@ public class ToolService(
             .Select(x => x.Tool)
             .ToArrayAsync();
 
-    public async Task<Tool?> SuggestBestTool(
+    public async Task<Tool> SuggestBestTool(
         string farmerId,
         string cropId)
     {
@@ -34,7 +34,7 @@ public class ToolService(
             ? tools.Where(x => x.CropId == cropId).OrderByDescending(x => x.SpecificBonusQuantityPerHarvest).ThenByDescending(x => x.SpecificSavingTimeInMiliSeconds)
             : tools.OrderByDescending(x => x.GeneralBonusQuantityPerHarvest).ThenByDescending(x => x.GeneralSavingTimeInMiliSeconds);
 
-        return await tools.FirstOrDefaultAsync();
+        return await tools.FirstAsync();
     }
 
     #endregion

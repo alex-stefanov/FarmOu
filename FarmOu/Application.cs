@@ -76,13 +76,22 @@ public static class Application
                     }
                 case 4:
                     {
-                        await FarmSessionMenu.CropSelectionMenu();
+                        var crop = await FarmSessionMenu.CropSelectionMenu(
+                            cropService,
+                            currentFarmer!);
 
-                        await FarmSessionMenu.ToolSelectionMenu();
+                        var tool = await FarmSessionMenu.ToolSelectionMenu(
+                            toolService,
+                            crop,
+                            currentFarmer!);
 
-                        await FarmSessionMenu.TimeSelectioneMenu();
+                        long timeInMiliseconds = FarmSessionMenu.TimeSelectionMenu();
 
-                        await FarmSessionMenu.FarmAnimation();
+                        await FarmSessionMenu.FarmAnimation(
+                            crop,
+                            tool,
+                            currentFarmer!,
+                            timeInMiliseconds);
 
                         break;
                     }

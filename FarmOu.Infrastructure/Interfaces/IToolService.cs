@@ -7,7 +7,7 @@ public interface IToolService
     Task<IEnumerable<Tool>> GetAllFarmerTools(
         string farmerId);
 
-    Task<Tool?> SuggestBestTool(
+    Task<Tool> SuggestBestTool(
         string farmerId,
         string cropId);
 }
