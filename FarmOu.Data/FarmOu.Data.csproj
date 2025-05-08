@@ -24,8 +24,4 @@
     <ProjectReference Include="..\FarmOu.Common\FarmOu.Common.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Migrations\" />
-  </ItemGroup>
-
 </Project>

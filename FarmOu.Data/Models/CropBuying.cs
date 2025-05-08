@@ -7,7 +7,7 @@ namespace FarmOu.Data.Models;
 /// <summary>
 /// Represents a crop buying in the system.
 /// </summary>
-[PrimaryKey(nameof(FarmerId), nameof(CropId))]
+[PrimaryKey(nameof(BoughtAt), nameof(FarmerId), nameof(CropId))]
 public class CropBuying
 {
     /// <summary>

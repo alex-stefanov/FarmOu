@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FarmOu.Data.Migrations
 {
     [DbContext(typeof(FarmOuDbContext))]
-    [Migration("20250508063125_InitialMigration")]
+    [Migration("20250508203202_InitialMigration")]
     partial class InitialMigration
     {
         /// <inheritdoc />
@@ -199,14 +199,14 @@ namespace FarmOu.Data.Migrations
 
             modelBuilder.Entity("FarmOu.Data.Models.CropBuying", b =>
                 {
+                    b.Property<DateTime>("BoughtAt")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("FarmerId")
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("CropId")
                         .HasColumnType("nvarchar(450)");
-
-                    b.Property<DateTime>("BoughtAt")
-                        .HasColumnType("datetime2");
 
                     b.Property<decimal>("BuyPricePerCrop")
                         .HasColumnType("decimal(18,2)");
@@ -214,15 +214,20 @@ namespace FarmOu.Data.Migrations
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
 
-                    b.HasKey("FarmerId", "CropId");
+                    b.HasKey("BoughtAt", "FarmerId", "CropId");
 
                     b.HasIndex("CropId");
+
+                    b.HasIndex("FarmerId");
 
                     b.ToTable("CropBuyings");
                 });
 
             modelBuilder.Entity("FarmOu.Data.Models.CropSell", b =>
                 {
+                    b.Property<DateTime>("SoldAt")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("FarmerId")
                         .HasColumnType("nvarchar(450)");
 
@@ -235,12 +240,11 @@ namespace FarmOu.Data.Migrations
                     b.Property<decimal>("SellPricePerCrop")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<DateTime>("SoldAt")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("FarmerId", "CropId");
+                    b.HasKey("SoldAt", "FarmerId", "CropId");
 
                     b.HasIndex("CropId");
+
+                    b.HasIndex("FarmerId");
 
                     b.ToTable("CropSells");
                 });
@@ -1194,10 +1198,12 @@ namespace FarmOu.Data.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
                     b.Property<string>("LoginProvider")
-                        .HasColumnType("nvarchar(450)");
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
 
                     b.Property<string>("ProviderKey")
-                        .HasColumnType("nvarchar(450)");
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
 
                     b.Property<string>("ProviderDisplayName")
                         .HasColumnType("nvarchar(max)");
@@ -1234,10 +1240,12 @@ namespace FarmOu.Data.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("LoginProvider")
-                        .HasColumnType("nvarchar(450)");
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(450)");
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
 
                     b.Property<string>("Value")
                         .HasColumnType("nvarchar(max)");
