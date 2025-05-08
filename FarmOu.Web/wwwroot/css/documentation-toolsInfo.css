@@ -1,0 +1,157 @@
+﻿:root {
+    --common: #a0a0a0;
+    --epic: #9b59b6;
+    --legendary: #f1c40f;
+    --mythical: #e74c3c;
+    --unique: #2ecc71;
+    --godlike: linear-gradient(45deg, #ffffff 50%, #f1c40f 50%);
+}
+
+.tools-container {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+.title {
+    text-align: center;
+    font-family: 'Comic Sans MS', cursive;
+    color: #34495e;
+    margin-bottom: 2rem;
+    font-size: 2.5em;
+    text-shadow: 2px 2px #ecf0f1;
+}
+
+.tools-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2rem;
+    padding: 1rem;
+}
+
+.tool-card {
+    background: white;
+    border-radius: 20px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+    border: 3px solid;
+    position: relative;
+    overflow: hidden;
+}
+
+.tool-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 5px;
+    background: currentColor;
+    opacity: 0.2;
+}
+
+.tool-card[data-rarity="Common"] {
+    border-color: var(--common);
+    color: var(--common)
+}
+
+.tool-card[data-rarity="Epic"] {
+    border-color: var(--epic);
+    color: var(--epic)
+}
+
+.tool-card[data-rarity="Legendary"] {
+    border-color: var(--legendary);
+    color: var(--legendary)
+}
+
+.tool-card[data-rarity="Mythical"] {
+    border-color: var(--mythical);
+    color: var(--mythical)
+}
+
+.tool-card[data-rarity="Unique"] {
+    border-color: var(--unique);
+    color: var(--unique)
+}
+
+.tool-card[data-rarity="Godlike"] {
+    border-color: #f1c40f;
+    background: var(--godlike);
+    background-size: 200% 200%;
+}
+
+.tool-header {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.tool-icon {
+    font-size: 2.5rem; 
+    width: 80px; 
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0,0,0,0.1);
+    border-radius: 15px;
+    padding: 10px; 
+    flex-shrink: 0; 
+}
+
+.tool-name {
+    font-size: 1.6em;
+    font-weight: bold;
+    font-family: 'Comic Sans MS', cursive;
+}
+
+.tool-level {
+    font-size: 0.9em;
+    opacity: 0.8;
+}
+
+.tool-stats {
+    display: grid;
+    gap: 1rem;
+}
+
+.stat-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.8rem;
+    background: rgba(0,0,0,0.05);
+    border-radius: 10px;
+    font-size: 1.05em;
+}
+
+.stat-label {
+    font-family: 'Comic Sans MS', cursive;
+}
+
+.stat-value {
+    font-weight: bold;
+}
+
+.crop-usage {
+    text-align: center;
+    font-size: 2.2em;
+    padding: 1.2rem;
+    background: rgba(0,0,0,0.05);
+    border-radius: 15px;
+    margin: 1.5rem 0;
+}
+
+@media (max-width: 768px) {
+    .tools-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .tool-icon {
+        width: 70px;
+        height: 70px;
+        font-size: 2.2rem;
+    }
+}

@@ -6,4 +6,6 @@ public interface ICropService
 {
     Task<IEnumerable<(Crop, int)>> GetAllCropsWithQuantity(
         string farmerId);
+
+    Task<IEnumerable<Crop>> GetAllCrops();
 }

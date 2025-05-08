@@ -1,0 +1,49 @@
+﻿@using FarmOu.Web.Models;
+@model IEnumerable<CropInfoViewModel>
+
+@{
+    ViewData["Title"] = "Crops Info";
+}
+
+<div class="crops-container">
+    <h1 class="title">🌱 Farm Crops Information 🌻</h1>
+
+    <div class="crops-grid">
+        @foreach (var crop in Model)
+        {
+            <div class="crop-card">
+                <div class="crop-header">
+                    <div class="crop-icon">@crop.Icon</div>
+                    <h2 class="crop-name">@crop.Name</h2>
+                </div>
+
+                <div class="stats-grid">
+                    <div class="stat-box">
+                        <div class="stat-label">⏳ Harvest Time</div>
+                        <div class="stat-value">@((crop.HarvestingTimeInMiliseconds / 1000))s</div>
+                    </div>
+
+                    <div class="stat-box highlight-stat">
+                        <div class="stat-label">🌟 XP/Harvest</div>
+                        <div class="stat-value">@crop.XpPerHarvest</div>
+                    </div>
+
+                    <div class="stat-box">
+                        <div class="stat-label">📦 Quantity</div>
+                        <div class="stat-value">@crop.QuantityPerHarvest</div>
+                    </div>
+
+                    <div class="stat-box">
+                        <div class="stat-label">💰 Sold</div>
+                        <div class="stat-value">@crop.OverallSold</div>
+                    </div>
+
+                    <div class="stat-box" style="grid-column: span 2;">
+                        <div class="stat-label">🛒 Total Bought</div>
+                        <div class="stat-value">@crop.OverallBought</div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

@@ -35,5 +35,9 @@ public class CropService(
         return cropsWithQuantities;
     }
 
+    public async Task<IEnumerable<Crop>> GetAllCrops()
+        => await cropRepository
+            .GetAllAsync();
+
     #endregion
 }

@@ -1,0 +1,53 @@
+﻿@using FarmOu.Web.Models;
+@model IEnumerable<ToolInfoViewModel>
+
+@{
+    ViewData["Title"] = "Tools Info";
+}
+
+<div class="tools-container">
+    <h1 class="title">🛠️ Tools Information ⚒️</h1>
+
+    <div class="tools-grid">
+        @foreach (var tool in Model)
+        {
+            <div class="tool-card" data-rarity="@tool.Rarity">
+                <div class="tool-header">
+                    <div class="tool-icon">@tool.Icon</div>
+                    <div>
+                        <div class="tool-name">@tool.Name</div>
+                        <div class="tool-level">Level @tool.LevelNeeded</div>
+                    </div>
+                </div>
+
+                <div class="crop-usage">@tool.UsedForCropIcon</div>
+
+                <div class="tool-stats">
+                    @{
+                        string FormatTime(int ms) => $"{(ms / 1000f):0.0}s";
+                    }
+                    <div class="stat-row">
+                        <span class="stat-label">⏱️ Specific Time</span>
+                        <span class="stat-value">@FormatTime(tool.SpecificSavingTimeInMiliSeconds)</span>
+                    </div>
+                    <div class="stat-row">
+                        <span class="stat-label">⏳ General Time</span>
+                        <span class="stat-value">@FormatTime(tool.GeneralSavingTimeInMiliSeconds)</span>
+                    </div>
+                    <div class="stat-row">
+                        <span class="stat-label">📈 Specific Bonus</span>
+                        <span class="stat-value">+@tool.SpecificBonusQuantityPerHarvest</span>
+                    </div>
+                    <div class="stat-row">
+                        <span class="stat-label">📊 General Bonus</span>
+                        <span class="stat-value">+@tool.GeneralBonusQuantityPerHarvest</span>
+                    </div>
+                    <div class="stat-row" style="background: currentColor; color: white">
+                        <span class="stat-label">✨ Rarity</span>
+                        <span class="stat-value">@tool.Rarity</span>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

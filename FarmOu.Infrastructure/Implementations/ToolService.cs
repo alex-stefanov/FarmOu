@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 namespace FarmOu.Infrastructure.Implementations;
 
 public class ToolService(
+    IRepository<Tool, string> toolsRepository,
     IRepository<FarmerTool, object> ftRepository)
     : IToolService
 {
@@ -37,6 +38,13 @@ public class ToolService(
 
         return await tools.FirstAsync();
     }
+
+    public async Task<IEnumerable<Tool>> GetAllTools()
+        => await toolsRepository
+            .GetAllAttached()
+            .Include(x=>x.Crop)
+            .OrderBy(x => x.Rarity)
+            .ToArrayAsync();
 
     #endregion
 }

@@ -90,6 +90,7 @@ public class StartUp
             farmerCropRepository);
 
         var toolService = new ToolService(
+            toolRepository,
             farmerToolRepository);
 
         var cropService = new CropService(
