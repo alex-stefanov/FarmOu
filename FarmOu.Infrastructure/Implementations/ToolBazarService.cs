@@ -99,7 +99,8 @@ public class ToolBazarService(
             .Where(x => leftToolIds.Contains(x.Id))
             .ToArrayAsync();
 
-        return leftTools;
+        return leftTools
+            .OrderBy(x => x.Rarity);
     }
 
     /// <inheritdoc/>

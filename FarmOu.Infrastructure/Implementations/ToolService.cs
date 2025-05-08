@@ -18,6 +18,7 @@ public class ToolService(
             .Include(x => x.Tool)
             .Where(x => x.FarmerId == farmerId)
             .Select(x => x.Tool)
+            .OrderBy(x => x.Rarity)
             .ToArrayAsync();
 
     public async Task<Tool> SuggestBestTool(
