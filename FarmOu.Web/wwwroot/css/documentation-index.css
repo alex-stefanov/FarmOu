@@ -1,0 +1,99 @@
+﻿.docs-container {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+.doc-title {
+    text-align: center;
+    font-family: 'Comic Sans MS', cursive;
+    color: #2d6a4f;
+    margin-bottom: 2rem;
+    font-size: 2.5em;
+    text-shadow: 2px 2px #c8e6c9;
+}
+
+.doc-section {
+    background: white;
+    border-radius: 20px;
+    padding: 2rem;
+    margin: 1.5rem 0;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border: 2px solid #c8e6c9;
+}
+
+.section-title {
+    color: #1b5e20;
+    font-family: 'Comic Sans MS', cursive;
+    font-size: 1.8em;
+    margin-bottom: 1rem;
+}
+
+.doc-list {
+    list-style-type: none;
+    padding-left: 1.5rem;
+}
+
+.doc-list li {
+    margin: 0.8rem 0;
+    font-size: 1.1em;
+    position: relative;
+}
+
+.doc-list li::before {
+    content: '🌱';
+    position: absolute;
+    left: -1.5rem;
+}
+
+.social-card {
+    background: #f1f8e9;
+    padding: 1.5rem;
+    border-radius: 15px;
+    text-align: center;
+    margin: 2rem 0;
+}
+
+.social-link {
+    display: inline-flex;
+    align-items: center;
+    margin: 0 1.5rem;
+    padding: 0.8rem 1.5rem;
+    border-radius: 30px;
+    background: #e8f5e9;
+    text-decoration: none;
+    transition: transform 0.3s ease;
+}
+
+.social-link:hover {
+    transform: translateY(-3px);
+}
+
+.social-link i {
+    font-size: 1.5em;
+    margin-right: 0.8rem;
+    color: #E1306C;
+}
+
+.architecture-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin: 1rem 0;
+}
+
+.arch-item {
+    background: #f8f9fa;
+    padding: 1rem;
+    border-radius: 12px;
+    border-left: 4px solid #4caf50;
+}
+
+.tech-badge {
+    display: inline-block;
+    padding: 0.3rem 0.8rem;
+    margin: 0.3rem;
+    background: #e8f5e9;
+    border-radius: 20px;
+    font-size: 0.9em;
+}
