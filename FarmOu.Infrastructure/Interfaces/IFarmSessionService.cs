@@ -28,7 +28,7 @@ public interface IFarmSessionService
     /// <returns>
     /// A <see cref="Task"/> that represents the asynchronous creation operation.
     /// </returns>
-    Task CreateSession(
+    Task<int> CreateSession(
         string farmerId,
         string cropId,
         string toolId,

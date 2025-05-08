@@ -363,6 +363,9 @@ namespace FarmOu.Data.Migrations
 
             modelBuilder.Entity("FarmOu.Data.Models.FarmingSession", b =>
                 {
+                    b.Property<DateTime>("HarvestedAt")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("CropId")
                         .HasColumnType("nvarchar(450)");
 
@@ -378,10 +381,9 @@ namespace FarmOu.Data.Migrations
                     b.Property<int>("FarmedQuantity")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("HarvestedAt")
-                        .HasColumnType("datetime2");
+                    b.HasKey("HarvestedAt", "CropId", "FarmerId", "ToolId");
 
-                    b.HasKey("CropId", "FarmerId", "ToolId");
+                    b.HasIndex("CropId");
 
                     b.HasIndex("FarmerId");
 
@@ -435,7 +437,7 @@ namespace FarmOu.Data.Migrations
                             CropId = "a3f1e7c2-4b5d-4e12-9f07-1b2c3d4e5f60",
                             GeneralBonusQuantityPerHarvest = 0,
                             GeneralSavingTimeInMiliSeconds = 0,
-                            LevelNeeded = 5,
+                            LevelNeeded = 1,
                             Name = "Wheatwind Scythe",
                             Rarity = 0,
                             SpecificBonusQuantityPerHarvest = 1,
@@ -1189,12 +1191,10 @@ namespace FarmOu.Data.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
                     b.Property<string>("LoginProvider")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("ProviderKey")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("ProviderDisplayName")
                         .HasColumnType("nvarchar(max)");
@@ -1231,12 +1231,10 @@ namespace FarmOu.Data.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("LoginProvider")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Name")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Value")
                         .HasColumnType("nvarchar(max)");
@@ -1350,7 +1348,7 @@ namespace FarmOu.Data.Migrations
                     b.HasOne("FarmOu.Data.Models.Tool", "Tool")
                         .WithMany("FarmingSessions")
                         .HasForeignKey("ToolId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Crop");

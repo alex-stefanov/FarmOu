@@ -25,7 +25,7 @@ public class ToolConfiguration
     private static IEnumerable<Tool> CreateTools()
         =>
         [
-            new Tool { Id = "0794a9c9-f6d4-4c11-a1c0-f77ee2cac235", Name = "Wheatwind Scythe", LevelNeeded = 5, CropId = "a3f1e7c2-4b5d-4e12-9f07-1b2c3d4e5f60", Rarity = Rarity.Common, GeneralBonusQuantityPerHarvest = 0, GeneralSavingTimeInMiliSeconds = 0, SpecificBonusQuantityPerHarvest = 1, SpecificSavingTimeInMiliSeconds = 500 },
+            new Tool { Id = "0794a9c9-f6d4-4c11-a1c0-f77ee2cac235", Name = "Wheatwind Scythe", LevelNeeded = 1, CropId = "a3f1e7c2-4b5d-4e12-9f07-1b2c3d4e5f60", Rarity = Rarity.Common, GeneralBonusQuantityPerHarvest = 0, GeneralSavingTimeInMiliSeconds = 0, SpecificBonusQuantityPerHarvest = 1, SpecificSavingTimeInMiliSeconds = 500 },
             new Tool { Id = "7e6e5f03-0f1f-43e8-a3d0-9cab05a9a117", Name = "Pepper Pruner", LevelNeeded = 5, CropId = "b4e2f8d3-5c6e-4f23-8a18-2c3d4e5f6a70", Rarity = Rarity.Common, GeneralBonusQuantityPerHarvest = 0, GeneralSavingTimeInMiliSeconds = 0, SpecificBonusQuantityPerHarvest = 1, SpecificSavingTimeInMiliSeconds = 500 },
             new Tool { Id = "b63467bf-8dc6-472a-88f1-af869eefac8a", Name = "Carrot Crescendo", LevelNeeded = 5, CropId = "c5f309e4-6d7f-4g34-1b29-3d4e5f6a7b80", Rarity = Rarity.Common, GeneralBonusQuantityPerHarvest = 0, GeneralSavingTimeInMiliSeconds = 0, SpecificBonusQuantityPerHarvest = 1, SpecificSavingTimeInMiliSeconds = 500 },
             new Tool { Id = "7d6cbabc-cbfb-42eb-bd93-590ed5f6f3da", Name = "Fungus Forger", LevelNeeded = 5, CropId = "d6g410f5-7e80-4h45-2c30-4e5f6a7b8c90", Rarity = Rarity.Common, GeneralBonusQuantityPerHarvest = 0, GeneralSavingTimeInMiliSeconds = 0, SpecificBonusQuantityPerHarvest = 1, SpecificSavingTimeInMiliSeconds = 500 },

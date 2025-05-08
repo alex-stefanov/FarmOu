@@ -65,7 +65,8 @@ public class StartUp
         #region Register Services
 
         var userService = new UserService(
-            userManager);
+            userManager,
+            farmerToolRepository);
 
         var cropBazarService = new CropBazarService(
             cropRepository,

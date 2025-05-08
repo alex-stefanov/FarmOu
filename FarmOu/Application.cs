@@ -80,14 +80,25 @@ public static class Application
                             cropService,
                             currentFarmer!);
 
+                        if (crop is null)
+                        {
+                            break;
+                        }
+
                         var tool = await FarmSessionMenu.ToolSelectionMenu(
                             toolService,
                             crop,
                             currentFarmer!);
 
-                        long timeInMiliseconds = FarmSessionMenu.TimeSelectionMenu();
+                        if (tool is null)
+                        {
+                            break;
+                        }
+
+                        long timeInMiliseconds = await FarmSessionMenu.TimeSelectionMenu();
 
                         await FarmSessionMenu.FarmAnimation(
+                            farmingSessionService,
                             crop,
                             tool,
                             currentFarmer!,

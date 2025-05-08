@@ -27,7 +27,7 @@ public class FarmSessionService(
     #region IFarmSessionService Members
 
     /// <inheritdoc/>
-    public async Task CreateSession(
+    public async Task<int> CreateSession(
         string farmerId,
         string cropId,
         string toolId,
@@ -127,6 +127,8 @@ public class FarmSessionService(
 
         await farmerRepository.UpdateAsync(farmer);
         await fsRepository.AddAsync(farmingSession);
+
+        return quantityCrops;
     }
 
     #endregion

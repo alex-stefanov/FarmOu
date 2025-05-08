@@ -7,7 +7,7 @@ namespace FarmOu.UI.Menus;
 
 public static class FarmSessionMenu
 {
-    public static async Task<Crop> CropSelectionMenu(
+    public static async Task<Crop?> CropSelectionMenu(
         ICropService cropService,
         Farmer farmer)
     {
@@ -61,12 +61,17 @@ public static class FarmSessionMenu
                 selectedIndex = (selectedIndex - 1 + cropsWithQuantity.Count()) % cropsWithQuantity.Count();
             }
 
+            if (key == ConsoleKey.Escape)
+            {
+                return null;
+            }
+
         } while (key != ConsoleKey.Enter);
 
         return cropsWithQuantity.ElementAt(selectedIndex).Item1;
     }
 
-    public static async Task<Tool> ToolSelectionMenu(
+    public static async Task<Tool?> ToolSelectionMenu(
         IToolService toolService,
         Crop crop,
         Farmer farmer)
@@ -119,6 +124,11 @@ public static class FarmSessionMenu
                 return await SuggestBestTool(toolService, crop, farmer);
             }
 
+            if(key == ConsoleKey.Escape)
+            {
+                return null;
+            }
+
         } while (key != ConsoleKey.Enter);
 
         return farmerTools.ElementAt(selectedIndex);
@@ -149,7 +159,7 @@ public static class FarmSessionMenu
         return tool;
     }
 
-    public static long TimeSelectionMenu()
+    public static async Task<long> TimeSelectionMenu()
     {
         Console.Clear();
 
@@ -185,10 +195,114 @@ public static class FarmSessionMenu
             totalSeconds = 5 * 60;
         }
 
-        Console.WriteLine($"\nSelected Time: {minutes}m {seconds}s\nPress any key to continue...");
-        Console.ReadKey(true);
+        Console.WriteLine($"\nSelected Time: {minutes}m {seconds}s");
+        await Task.Delay(5000);
 
         return totalSeconds * 1000L;
+    }
+
+    public static async Task FarmAnimation(
+        IFarmSessionService fsService,
+        Crop crop,
+        Tool tool,
+        Farmer farmer,
+        long timeInMilliseconds)
+    {
+        var timePerHarvest = crop.HarvestingTimeInMiliSeconds
+            - (crop.Id == tool.CropId
+                ? tool.SpecificSavingTimeInMiliSeconds
+                : tool.GeneralBonusQuantityPerHarvest);
+
+        const int slots = 20;
+        string cropIcon = GetCropIcon(crop.Name);
+        string seedIcon = "🌱";
+        string toolIcon = GetToolIcon(tool.Name);
+        bool[] harvested = new bool[slots];
+
+        string[] actionFrames = { "👩‍🌾🔨", "👩‍🌾💥" };
+
+        int currentPos = 0;
+        var start = DateTime.UtcNow;
+
+        Console.Clear();
+        Console.ForegroundColor = ConsoleColor.Magenta;
+        Console.WriteLine(MenuConstants.Logo);
+        Console.ResetColor();
+        Console.WriteLine();
+
+        while (true)
+        {
+            var elapsed = DateTime.UtcNow - start;
+            if (elapsed.TotalMilliseconds >= timeInMilliseconds)
+                break;
+
+            foreach (var frame in actionFrames)
+            {
+                Console.SetCursorPosition(0, 9);
+                for (int i = 0; i < slots; i++)
+                {
+                    if (i == currentPos)
+                        Console.Write(frame + " ");
+                    else
+                        Console.Write((harvested[i] ? seedIcon : cropIcon) + " ");
+                }
+
+                var remaining = TimeSpan.FromMilliseconds(timeInMilliseconds) - elapsed;
+                if (remaining.TotalMilliseconds < 0) remaining = TimeSpan.Zero;
+                Console.SetCursorPosition(0, 12);
+                Console.Write(new string(' ', Console.WindowWidth));
+                Console.SetCursorPosition(0, 12);
+
+                Console.Write($"Tool: ");
+                var (bg, fg) = GetColorsByRarity(tool.Rarity, true);
+                Console.BackgroundColor = bg;
+                Console.ForegroundColor = fg;
+                Console.WriteLine($"{toolIcon} {tool.Name}");
+                Console.ResetColor();
+
+                Console.WriteLine($"Time Left: {remaining.Minutes}m {remaining.Seconds}s");
+
+                await Task.Delay(timePerHarvest);
+            }
+
+            harvested[currentPos] = true;
+            currentPos = (currentPos + 1) % slots;
+
+            if (currentPos == 0)
+            {
+                for (int i = 0; i < slots; i++)
+                    harvested[i] = false;
+            }
+
+            await Task.Delay(timePerHarvest);
+        }
+
+        int expectedQuantity = await fsService.CreateSession(
+            farmer.Id,
+            crop.Id,
+            tool.Id,
+            DateTime.UtcNow,
+            DateTime.UtcNow.AddMilliseconds(timeInMilliseconds));
+
+        Console.Clear();
+
+        Console.ForegroundColor = ConsoleColor.Magenta;
+        Console.WriteLine(MenuConstants.Logo);
+        Console.ResetColor();
+
+        Console.WriteLine();
+        Console.WriteLine("Harvest complete! ✨");
+        Console.WriteLine($"Harvested Quantity: {expectedQuantity}");
+
+        Console.Write($"Used Tool: ");
+        var (bg1, fg1) = GetColorsByRarity(tool.Rarity, true);
+        Console.BackgroundColor = bg1;
+        Console.ForegroundColor = fg1;
+        Console.WriteLine($"{toolIcon} {tool.Name}");
+        Console.ResetColor();
+
+        Console.WriteLine("Press any key to continue...");
+        Console.ReadKey(true);
     }
 
     private static string GetCropIcon(
@@ -276,13 +390,4 @@ public static class FarmSessionMenu
             "Godlike Pumpkin Pulverizer" => "🎃🔨🔥",
             _ => "🛠️"
         };
-
-    public static Task FarmAnimation(
-        Crop crop,
-        Tool tool,
-        Farmer farmer,
-        long timeInMiliseconds)
-    {
-        throw new NotImplementedException();
-    }
 }

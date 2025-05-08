@@ -7,7 +7,7 @@ namespace FarmOu.Data.Models;
 /// <summary>
 /// Represents a farming session in the system.
 /// </summary>
-[PrimaryKey(nameof(CropId), nameof(FarmerId), nameof(ToolId))]
+[PrimaryKey(nameof(HarvestedAt),nameof(CropId), nameof(FarmerId), nameof(ToolId))]
 public class FarmingSession
 {
     /// <summary>

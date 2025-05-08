@@ -165,8 +165,8 @@ namespace FarmOu.Data.Migrations
                 name: "AspNetUserLogins",
                 columns: table => new
                 {
-                    LoginProvider = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
-                    ProviderKey = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
+                    LoginProvider = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    ProviderKey = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     ProviderDisplayName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     UserId = table.Column<string>(type: "nvarchar(450)", nullable: false)
                 },
@@ -210,8 +210,8 @@ namespace FarmOu.Data.Migrations
                 columns: table => new
                 {
                     UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    LoginProvider = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
+                    LoginProvider = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Value = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
@@ -341,7 +341,7 @@ namespace FarmOu.Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_FarmingsSessions", x => new { x.CropId, x.FarmerId, x.ToolId });
+                    table.PrimaryKey("PK_FarmingsSessions", x => new { x.HarvestedAt, x.CropId, x.FarmerId, x.ToolId });
                     table.ForeignKey(
                         name: "FK_FarmingsSessions_AspNetUsers_FarmerId",
                         column: x => x.FarmerId,
@@ -358,8 +358,7 @@ namespace FarmOu.Data.Migrations
                         name: "FK_FarmingsSessions_Tools_ToolId",
                         column: x => x.ToolId,
                         principalTable: "Tools",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -481,7 +480,7 @@ namespace FarmOu.Data.Migrations
                 columns: new[] { "Id", "CropId", "GeneralBonusQuantityPerHarvest", "GeneralSavingTimeInMiliSeconds", "LevelNeeded", "Name", "Rarity", "SpecificBonusQuantityPerHarvest", "SpecificSavingTimeInMiliSeconds" },
                 values: new object[,]
                 {
-                    { "0794a9c9-f6d4-4c11-a1c0-f77ee2cac235", "a3f1e7c2-4b5d-4e12-9f07-1b2c3d4e5f60", 0, 0, 5, "Wheatwind Scythe", 0, 1, 500 },
+                    { "0794a9c9-f6d4-4c11-a1c0-f77ee2cac235", "a3f1e7c2-4b5d-4e12-9f07-1b2c3d4e5f60", 0, 0, 1, "Wheatwind Scythe", 0, 1, 500 },
                     { "16559923-bf70-4f24-846d-4711303ec9b4", "j2m076l1-3k46-4n01-8i96-0e1f2g3h4i56", 0, 0, 15, "Cotton Cutter", 1, 1, 1000 },
                     { "1e6c2c50-1e05-4a5a-b990-32813b97823c", "l4o298n3-5m68-4p23-0k18-2g3h4i5j6k78", 1, 1000, 25, "Blueberry Blitz", 2, 2, 1500 },
                     { "27f51def-481c-4cf1-b7e9-07aadfe73d60", "f8i632h7-9g02-4j67-4e52-6a7b8c9d0e12", 0, 0, 15, "Corncob Clarifier", 1, 1, 1000 },
@@ -569,6 +568,11 @@ namespace FarmOu.Data.Migrations
                 name: "IX_FarmersTools_ToolId",
                 table: "FarmersTools",
                 column: "ToolId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_FarmingsSessions_CropId",
+                table: "FarmingsSessions",
+                column: "CropId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_FarmingsSessions_FarmerId",

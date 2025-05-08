@@ -1,4 +1,5 @@
 ﻿using FarmOu.Data.Models;
+using FarmOu.Data.Repositories;
 using FarmOu.Infrastructure.Interfaces;
 using Microsoft.AspNetCore.Identity;
 
@@ -11,6 +12,7 @@ public class UserService
     : IUserService
 {
     private readonly UserManager<Farmer> userManager;
+    private readonly IRepository<FarmerTool, object> ftRepository;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="UserService"/> class.
@@ -18,9 +20,14 @@ public class UserService
     /// <param name="userManager">The user manager for managing user-related tasks.</param>
     /// <exception cref="ArgumentNullException"></exception>
     public UserService(
-        UserManager<Farmer> userManager)
+        UserManager<Farmer> userManager,
+        IRepository<FarmerTool, object> ftRepository)
     {
-        this.userManager = userManager ?? throw new ArgumentNullException(nameof(userManager));
+        this.userManager = userManager 
+            ?? throw new ArgumentNullException(nameof(userManager));
+
+        this.ftRepository = ftRepository 
+            ?? throw new ArgumentNullException(nameof(ftRepository));
     }
 
     #region IUserService Members
@@ -48,6 +55,14 @@ public class UserService
 
         if (result.Succeeded)
         {
+            var farmerTool = new FarmerTool
+            {
+                FarmerId = farmer.Id,
+                ToolId = "0794a9c9-f6d4-4c11-a1c0-f77ee2cac235",
+            };
+
+            await ftRepository.AddAsync(farmerTool);
+
             return farmer;
         }
 

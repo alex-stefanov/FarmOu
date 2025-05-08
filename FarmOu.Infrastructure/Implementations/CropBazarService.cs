@@ -186,6 +186,9 @@ public class CropBazarService(
         };
 
         farmer.Coins += cropS.TotalSellPrice;
+        farmerCrop.Quantity -= quantity;
+
+        await fcRepository.UpdateAsync(farmerCrop);
 
         await farmerRepository.UpdateAsync(farmer);
 
