@@ -61,6 +61,8 @@ public class FarmOuDbContext
     /// </summary>
     public virtual DbSet<FarmingSession> FarmingsSessions { get; set; } = null!;
 
+    public virtual DbSet<ZdravkaTable> ZdravkaTables { get; set; } = null!;
+
     /// <summary>
     /// Default constructor for the database context.
     /// </summary>
